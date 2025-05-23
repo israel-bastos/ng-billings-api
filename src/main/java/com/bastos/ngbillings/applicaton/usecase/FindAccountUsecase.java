@@ -1,6 +1,5 @@
 package com.bastos.ngbillings.applicaton.usecase;
 
-import com.bastos.ngbillings.adapters.controller.dto.AccountRequestDTO;
 import com.bastos.ngbillings.adapters.controller.dto.AccountResponseDTO;
 
 /**
