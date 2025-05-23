@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "d624317a-00d9-405c-bdf0-dce7183af15e",
+		"name": "ng-billings API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18671445",
+		"_collection_link": "https://restless-zodiac-138169.postman.co/workspace/odonto-prev~dabdb64b-fde8-4a66-90d3-9d48ea21b1f9/collection/18671445-d624317a-00d9-405c-bdf0-dce7183af15e?action=share&source=collection_link&creator=18671445"
+	},
+	"item": [
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountNumber\": \"123\",\n  \"balance\": 100.0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountNumber\": \"123\",\n  \"amount\": 20.0,\n  \"type\": \"D\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account (path param)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/accounts/123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"accounts",
+						"123"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
