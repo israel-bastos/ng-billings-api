@@ -8,7 +8,6 @@ import com.bastos.ngbillings.applicaton.exception.InsufficientFundsBadRequestExc
 import com.bastos.ngbillings.applicaton.exception.PaymentDeclinedBadRequestException;
 import com.bastos.ngbillings.applicaton.usecase.CreateTransactionUsecase;
 import com.bastos.ngbillings.domain.model.PaymentType;
-import com.bastos.ngbillings.infra.PaymentGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
