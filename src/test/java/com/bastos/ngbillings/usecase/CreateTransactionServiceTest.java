@@ -6,12 +6,13 @@ import com.bastos.ngbillings.adapters.psersistence.entity.AccountEntity;
 import com.bastos.ngbillings.adapters.psersistence.entity.TransactionEntity;
 import com.bastos.ngbillings.adapters.psersistence.repository.AccountRepository;
 import com.bastos.ngbillings.adapters.psersistence.repository.TransactionRepository;
-import com.bastos.ngbillings.applicaton.exception.AccountNotFoundException;
 import com.bastos.ngbillings.applicaton.exception.InsufficientFundsBadRequestException;
 import com.bastos.ngbillings.applicaton.exception.PaymentDeclinedBadRequestException;
 import com.bastos.ngbillings.applicaton.service.CreateTransactionService;
 import com.bastos.ngbillings.domain.model.PaymentType;
+import com.bastos.ngbillings.applicaton.exception.AccountNotFoundException;
 import com.bastos.ngbillings.infra.PaymentGateway;
+import com.bastos.ngbillings.infra.messaging.TransactionQueuePublisher;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,8 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,6 +34,9 @@ class CreateTransactionServiceTest {
 
     @Mock
     PaymentGateway paymentGateway;
+
+    @Mock
+    private TransactionQueuePublisher queuePublisher;
 
     @Mock
     private TransactionRepository transactionRepository;
