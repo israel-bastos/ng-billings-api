@@ -74,7 +74,6 @@ class AccountControllerTest {
     @Test
     @DisplayName("should return 400 when account already exists")
     void shouldReturnBadRequestWhenAccountAlreadyExists() throws Exception {
-        AccountRequestDTO request = new AccountRequestDTO("acc-001", new BigDecimal("100.00"));
 
         when(createAccountUsecase.execute(any()))
                 .thenThrow(new ExistenceAccountBadRequestException());

@@ -36,9 +36,6 @@ class CreateTransactionServiceTest {
     PaymentGateway paymentGateway;
 
     @Mock
-    private TransactionQueuePublisher queuePublisher;
-
-    @Mock
     private TransactionRepository transactionRepository;
 
     @InjectMocks

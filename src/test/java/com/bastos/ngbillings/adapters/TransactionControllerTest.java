@@ -34,9 +34,6 @@ class TransactionControllerTest {
     @MockBean
     private CreateTransactionUsecase createTransactionUsecase;
 
-    @MockBean
-    private PaymentGateway paymentGateway;
-
     @Autowired
     private ObjectMapper objectMapper;
 
