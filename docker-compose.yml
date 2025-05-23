@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  ng-billings:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ng-billings-api
+    ports:
+      - "8080:8080"

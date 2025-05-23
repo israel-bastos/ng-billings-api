@@ -152,10 +152,6 @@ mvn clean install
 
 Você pode rodar esta aplicação em um container local:
 
-### 🔨 1. Gerar o `.jar` com Maven
-
-```bash
-
 ### 🧱 1. Construir a imagem Docker
 
 ```bash
@@ -173,26 +169,82 @@ docker run -p 8080:8080 ng-billings-api
 ```bash
 docker-compose up --build
 ```
+## 🧹 Limpando Containers e Imagens Docker (para rebuild completo)
+
+Sempre que você fizer alterações no código-fonte ou nas dependências e quiser garantir que o Docker reflita essas mudanças, siga os passos abaixo para remover containers e imagens antigos:
+
+```bash
+# Parar e remover containers, volumes e redes do docker-compose
+docker-compose down -v --remove-orphans
+
+# Remover a imagem antiga da aplicação (substitua pelo nome se necessário)
+docker rmi ng-billings-api
+
+# Verificar se não sobrou container antigo
+docker ps -a
+
+# Opcional: remover todos containers parados
+docker container prune
+```
+
+Após isso, você pode executar:
+
+```bash
+# Recompilar o projeto
+mvn clean package
+
+# Recriar a imagem Docker
+docker build -t ng-billings-api .
+
+# Subir a aplicação com Docker Compose
+docker-compose up --build
+```
+
 ---
 
 ## 📂 Estrutura do Projeto
 
-- `adapters.in.controller` → REST Controllers
-- `adapters.out.persistence` → JPA / H2 / Flyway
-- `application.usecase` → Casos de uso
-- `domain` → Entidades, VOs, regras
-- `dto` → Requisições e respostas REST
-- `config` → Swagger e beans auxiliares
+- `adapters.controller` → Controllers REST da aplicação
+- `adapters.controller.dto` → DTOs para entrada e saída das APIs
+- `adapters.psersistence.entity` → Entidades JPA do domínio persistente
+- `adapters.psersistence.repository` → Interfaces de acesso ao banco (Spring Data)
+- `application.service` → Implementações dos casos de uso (orquestração)
+- `application.usecase` → Contratos/portas dos casos de uso
+- `domain.enums` → Tipos fixos (como PaymentType)
+- `domain.exception` → Exceções de negócio
+- `domain.messaging` → Interface de publicação de eventos
+- `domain.strategy` → Estratégias de taxa de transação
+- `domain.vo` → Objetos de valor (como TransactionVO)
+- `infra.messaging` → Implementações simuladas (ex: RabbitMQ fake)
+- `config` → Configurações da aplicação (Swagger, beans, profiles)
 
 ---
+
+## 🧠 Arquitetura e Boas Práticas
+
+Este projeto segue princípios de arquitetura limpa com forte separação de responsabilidades:
+
+- ✅ **Arquitetura Hexagonal (Ports & Adapters)** (sem usar a nomenclatura literal)
+- ✅ **Clean Code**: coesão, nomes claros, classes curtas
+- ✅ **DDD**: com entidades, VOs, estratégia de taxa e camada de domínio isolada
+- ✅ **SOLID** aplicado nos serviços e interfaces
+- ✅ **Strategy Pattern** para taxas financeiras
+- ✅ **Simulação de Gateway de Pagamento**
+- ✅ **Simulação de fila com RabbitMQ fake**
 
 ## ✅ Testes
 
 - Testes unitários com JUnit + Mockito
 - Testes de integração com MockMvc
 - Cobertura com Jacoco
-
 ---
+
+## 🧪 Simulações Técnicas
+
+- 💳 **Gateway Fictício de Cartão**: verifica se a transação de crédito seria aprovada
+- 🧠 **Strategy de Taxas**: usada para aplicar taxa com base no tipo de pagamento
+- 📩 **Fila Simulada (RabbitMQ)**: eventos de transação são publicados para uma fila fake
+- 
 
 ### 🌐 Acessos
 

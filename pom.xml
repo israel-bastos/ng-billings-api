@@ -115,6 +115,13 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/FakeCreditCardGateway.class</exclude>
+                                <exclude>**/FakeTransactionQueuePublisher.class</exclude>
+                                <exclude>**/NgBillingsApplication.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
